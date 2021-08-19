@@ -13,6 +13,9 @@
 		C0AC6D1226CDFF5C0041C6B2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C0AC6D1026CDFF5C0041C6B2 /* Main.storyboard */; };
 		C0AC6D1426CDFF5E0041C6B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C0AC6D1326CDFF5E0041C6B2 /* Assets.xcassets */; };
 		C0AC6D1726CDFF5E0041C6B2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C0AC6D1526CDFF5E0041C6B2 /* LaunchScreen.storyboard */; };
+		C0AC6D2126CE003F0041C6B2 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AC6D2026CE003F0041C6B2 /* APIService.swift */; };
+		C0AC6D2426CE00620041C6B2 /* EventModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AC6D2326CE00620041C6B2 /* EventModel.swift */; };
+		C0AC6D2826CE01930041C6B2 /* EventViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AC6D2726CE01930041C6B2 /* EventViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +27,9 @@
 		C0AC6D1326CDFF5E0041C6B2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C0AC6D1626CDFF5E0041C6B2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C0AC6D1826CDFF5E0041C6B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C0AC6D2026CE003F0041C6B2 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		C0AC6D2326CE00620041C6B2 /* EventModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventModel.swift; sourceTree = "<group>"; };
+		C0AC6D2726CE01930041C6B2 /* EventViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +62,58 @@
 		C0AC6D0926CDFF5C0041C6B2 /* MVVM-EventApp */ = {
 			isa = PBXGroup;
 			children = (
-				C0AC6D0A26CDFF5C0041C6B2 /* AppDelegate.swift */,
-				C0AC6D0C26CDFF5C0041C6B2 /* SceneDelegate.swift */,
-				C0AC6D0E26CDFF5C0041C6B2 /* ViewController.swift */,
-				C0AC6D1026CDFF5C0041C6B2 /* Main.storyboard */,
+				C0AC6D1E26CE001B0041C6B2 /* Common */,
+				C0AC6D1F26CE002C0041C6B2 /* APIService */,
+				C0AC6D2226CE004B0041C6B2 /* Model */,
+				C0AC6D2526CE01120041C6B2 /* ViewModel */,
+				C0AC6D2626CE014A0041C6B2 /* Controllers */,
 				C0AC6D1326CDFF5E0041C6B2 /* Assets.xcassets */,
+				C0AC6D1026CDFF5C0041C6B2 /* Main.storyboard */,
 				C0AC6D1526CDFF5E0041C6B2 /* LaunchScreen.storyboard */,
 				C0AC6D1826CDFF5E0041C6B2 /* Info.plist */,
 			);
 			path = "MVVM-EventApp";
+			sourceTree = "<group>";
+		};
+		C0AC6D1E26CE001B0041C6B2 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				C0AC6D0A26CDFF5C0041C6B2 /* AppDelegate.swift */,
+				C0AC6D0C26CDFF5C0041C6B2 /* SceneDelegate.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		C0AC6D1F26CE002C0041C6B2 /* APIService */ = {
+			isa = PBXGroup;
+			children = (
+				C0AC6D2026CE003F0041C6B2 /* APIService.swift */,
+			);
+			path = APIService;
+			sourceTree = "<group>";
+		};
+		C0AC6D2226CE004B0041C6B2 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C0AC6D2326CE00620041C6B2 /* EventModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C0AC6D2526CE01120041C6B2 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				C0AC6D2726CE01930041C6B2 /* EventViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		C0AC6D2626CE014A0041C6B2 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				C0AC6D0E26CDFF5C0041C6B2 /* ViewController.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,7 +187,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				C0AC6D0F26CDFF5C0041C6B2 /* ViewController.swift in Sources */,
+				C0AC6D2826CE01930041C6B2 /* EventViewModel.swift in Sources */,
 				C0AC6D0B26CDFF5C0041C6B2 /* AppDelegate.swift in Sources */,
+				C0AC6D2126CE003F0041C6B2 /* APIService.swift in Sources */,
+				C0AC6D2426CE00620041C6B2 /* EventModel.swift in Sources */,
 				C0AC6D0D26CDFF5C0041C6B2 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
