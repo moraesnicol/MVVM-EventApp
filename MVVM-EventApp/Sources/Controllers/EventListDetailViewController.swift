@@ -1,15 +1,17 @@
 //
-//  ViewController.swift
+//  EventListDetailViewController.swift
 //  MVVM-EventApp
 //
-//  Created by Gabriel on 18/08/21.
+//  Created by Gabriel on 23/08/21.
 //
 
 import UIKit
 import Kingfisher
 
 
-final class EventListViewController: UIViewController {
+final class EventListDetailViewController: UIViewController {
+    private let randomImage: String = "https://hatrabbits.com/wp-content/uploads/2017/01/random.jpg"
+    
     
     var eventListTableViewCell: EventListTableViewCell?
     let cellEventListReuseIdentifier = "cellEventListReuseIdentifier"
@@ -17,10 +19,20 @@ final class EventListViewController: UIViewController {
     var events =  [EventModel]()
     var safeArea: UILayoutGuide!
     
-    lazy var topTitle: UILabel = {
+    
+    lazy var imageViewEvent: UIImageView = {
+        let image = UIImageView()
+        image.layer.cornerRadius = 12
+        image.clipsToBounds = true
+        image.translatesAutoresizingMaskIntoConstraints = false
+        image.contentMode = .scaleAspectFill
+        return image
+    }()
+    
+    lazy var titleEvent: UILabel = {
         let label = UILabel()
-        label.text = "Events  📅"
-        label.font = UIFont.monospacedDigitSystemFont(ofSize: 40, weight: UIFont.Weight.heavy)
+        label.text = "Título do evento"
+        label.font = UIFont.monospacedDigitSystemFont(ofSize: 30, weight: UIFont.Weight.heavy)
         label.adjustsFontSizeToFitWidth = true
         label.textColor = .white
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -28,10 +40,9 @@ final class EventListViewController: UIViewController {
         return label
     }()
     
-    lazy var eventTableView: UITableView = {
+    lazy var eventDetailTableView: UITableView = {
         let tableview = UITableView()
         tableview.translatesAutoresizingMaskIntoConstraints = false
-        
         return tableview
     }()
     
@@ -41,44 +52,47 @@ final class EventListViewController: UIViewController {
             data in
             self.events = data ?? []
             DispatchQueue.main.async {
-                self.eventTableView.reloadData()
+                self.eventDetailTableView.reloadData()
             }
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .yellow
         setupViews()
         fecthData()
-        constrainTopTitle()
+        constrainTitleEvent()
         constrainTableView()
     }
-   
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setNeedsStatusBarAppearanceUpdate()
-    }
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        .lightContent
+        navigationController?.setNavigationBarHidden(true, animated: animated)
     }
     
-    
-   func setupViews() {
-    safeArea = view.layoutMarginsGuide
-    view.backgroundColor = UIColor(red: 0.09, green: 0.05, blue: 0.35, alpha: 1.00)
-    eventTableView.backgroundColor = .clear
-    view.addSubview(eventTableView)
-    view.addSubview(topTitle)
-    eventTableView.register(EventListTableViewCell.self, forCellReuseIdentifier: cellEventListReuseIdentifier)
-    eventTableView.delegate = self
-    eventTableView.dataSource = self
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
     }
-
-    private  func constrainTopTitle(){
+    
+    func setupViews() {
+        safeArea = view.layoutMarginsGuide
+        view.backgroundColor = .red
+        eventDetailTableView.backgroundColor = .clear
+        view.addSubview(imageViewEvent)
+        view.addSubview(titleEvent)
+        view.addSubview(eventDetailTableView)
+        eventDetailTableView.register(EventListTableViewCell.self, forCellReuseIdentifier: cellEventListReuseIdentifier)
+        eventDetailTableView.delegate = self
+        eventDetailTableView.dataSource = self
+    }
+    
+    private  func constrainTitleEvent(){
         let constraint = [
-          topTitle.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 20),
-           topTitle.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 22),
-           topTitle.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant:  -10),
+            titleEvent.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 20),
+            titleEvent.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 22),
+            titleEvent.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant:  -10),
         ]
         constraint.forEach { (item) in
             item.isActive = true
@@ -88,10 +102,10 @@ final class EventListViewController: UIViewController {
     
     private  func constrainTableView(){
         let constraint = [
-            eventTableView.topAnchor.constraint(equalTo: topTitle.bottomAnchor, constant: 30),
-            eventTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            eventTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant:  -20),
-            eventTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -30),
+            eventDetailTableView.topAnchor.constraint(equalTo: titleEvent.bottomAnchor, constant: 30),
+            eventDetailTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            eventDetailTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant:  -20),
+            eventDetailTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -30),
         ]
         constraint.forEach { (item) in
             item.isActive = true
@@ -100,19 +114,11 @@ final class EventListViewController: UIViewController {
 }
 
 
-extension EventListViewController: UITableViewDelegate {
+extension EventListDetailViewController: UITableViewDelegate {
     
-  
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-                
-                let rootVc = EventListDetailViewController()
-                let navVC = UINavigationController(rootViewController: rootVc)
-                navVC.modalTransitionStyle =  .flipHorizontal
-                present(navVC, animated: true)
-            }
 }
 
-extension EventListViewController: UITableViewDataSource{
+extension EventListDetailViewController: UITableViewDataSource{
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -134,7 +140,6 @@ extension EventListViewController: UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        // this will turn on `masksToBounds` just before showing the cell
         cell.contentView.backgroundColor = .white
         let radius = cell.contentView.layer.cornerRadius
         cell.layer.shadowPath = UIBezierPath(roundedRect: cell.bounds, cornerRadius: radius).cgPath

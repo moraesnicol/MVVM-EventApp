@@ -3,10 +3,13 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C00DF39D26D3E02900419CEF /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = C00DF39C26D3E02900419CEF /* Kingfisher */; };
+		C00DF39F26D4244D00419CEF /* EventListDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00DF39E26D4244D00419CEF /* EventListDetailViewController.swift */; };
+		C00DF3A226D4248800419CEF /* EventListDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00DF3A126D4248800419CEF /* EventListDetailTableViewCell.swift */; };
 		C09538F126D17C94005520E1 /* EventListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09538F026D17C94005520E1 /* EventListTableViewCell.swift */; };
 		C0AC6D0B26CDFF5C0041C6B2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AC6D0A26CDFF5C0041C6B2 /* AppDelegate.swift */; };
 		C0AC6D0D26CDFF5C0041C6B2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AC6D0C26CDFF5C0041C6B2 /* SceneDelegate.swift */; };
@@ -16,9 +19,12 @@
 		C0AC6D2126CE003F0041C6B2 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AC6D2026CE003F0041C6B2 /* APIService.swift */; };
 		C0AC6D2426CE00620041C6B2 /* EventModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AC6D2326CE00620041C6B2 /* EventModel.swift */; };
 		C0AC6D2826CE01930041C6B2 /* EventListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AC6D2726CE01930041C6B2 /* EventListViewModel.swift */; };
+		C0E4023826D339370025E7CE /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E4023726D339370025E7CE /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C00DF39E26D4244D00419CEF /* EventListDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListDetailViewController.swift; sourceTree = "<group>"; };
+		C00DF3A126D4248800419CEF /* EventListDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListDetailTableViewCell.swift; sourceTree = "<group>"; };
 		C09538F026D17C94005520E1 /* EventListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListTableViewCell.swift; sourceTree = "<group>"; };
 		C0AC6D0726CDFF5C0041C6B2 /* MVVM-EventApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MVVM-EventApp.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0AC6D0A26CDFF5C0041C6B2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -30,6 +36,7 @@
 		C0AC6D2026CE003F0041C6B2 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		C0AC6D2326CE00620041C6B2 /* EventModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventModel.swift; sourceTree = "<group>"; };
 		C0AC6D2726CE01930041C6B2 /* EventListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListViewModel.swift; sourceTree = "<group>"; };
+		C0E4023726D339370025E7CE /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,12 +44,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C00DF39D26D3E02900419CEF /* Kingfisher in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C00DF3A026D4246000419CEF /* TableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				C00DF3A126D4248800419CEF /* EventListDetailTableViewCell.swift */,
+			);
+			path = TableViewCell;
+			sourceTree = "<group>";
+		};
 		C018053826CEBB7E00ACC80D /* Sources */ = {
 			isa = PBXGroup;
 			children = (
@@ -93,6 +109,7 @@
 		C09538F426D1A122005520E1 /* EventDetail */ = {
 			isa = PBXGroup;
 			children = (
+				C00DF3A026D4246000419CEF /* TableViewCell */,
 			);
 			path = EventDetail;
 			sourceTree = "<group>";
@@ -161,6 +178,7 @@
 			isa = PBXGroup;
 			children = (
 				C0AC6D0E26CDFF5C0041C6B2 /* EventListViewController.swift */,
+				C00DF39E26D4244D00419CEF /* EventListDetailViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -168,6 +186,7 @@
 		C0E4023626D2E0AD0025E7CE /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				C0E4023726D339370025E7CE /* Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -189,6 +208,7 @@
 			);
 			name = "MVVM-EventApp";
 			packageProductDependencies = (
+				C00DF39C26D3E02900419CEF /* Kingfisher */,
 			);
 			productName = "MVVM-EventApp";
 			productReference = C0AC6D0726CDFF5C0041C6B2 /* MVVM-EventApp.app */;
@@ -218,6 +238,7 @@
 			);
 			mainGroup = C0AC6CFE26CDFF5C0041C6B2;
 			packageReferences = (
+				C00DF39B26D3E02900419CEF /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = C0AC6D0826CDFF5C0041C6B2 /* Products */;
 			projectDirPath = "";
@@ -248,10 +269,13 @@
 				C09538F126D17C94005520E1 /* EventListTableViewCell.swift in Sources */,
 				C0AC6D0F26CDFF5C0041C6B2 /* EventListViewController.swift in Sources */,
 				C0AC6D2826CE01930041C6B2 /* EventListViewModel.swift in Sources */,
+				C0E4023826D339370025E7CE /* Extensions.swift in Sources */,
+				C00DF39F26D4244D00419CEF /* EventListDetailViewController.swift in Sources */,
 				C0AC6D0B26CDFF5C0041C6B2 /* AppDelegate.swift in Sources */,
 				C0AC6D2126CE003F0041C6B2 /* APIService.swift in Sources */,
 				C0AC6D2426CE00620041C6B2 /* EventModel.swift in Sources */,
 				C0AC6D0D26CDFF5C0041C6B2 /* SceneDelegate.swift in Sources */,
+				C00DF3A226D4248800419CEF /* EventListDetailTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -445,6 +469,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C00DF39B26D3E02900419CEF /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.3.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C00DF39C26D3E02900419CEF /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C00DF39B26D3E02900419CEF /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = C0AC6CFF26CDFF5C0041C6B2 /* Project object */;
 }

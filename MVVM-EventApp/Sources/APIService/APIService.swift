@@ -10,7 +10,7 @@ import Foundation
 struct APIService {
     
     private let apiURL = URL(string: "https://5f5a8f24d44d640016169133.mockapi.io/api/events/")!
-    
+  
     func fetchAllData(comp : @escaping ([EventModel]?) -> ()) {
         URLSession.shared.dataTask(with: apiURL) {
             (data, URLResponse, error) in
