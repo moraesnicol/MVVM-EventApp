@@ -12,58 +12,63 @@ import Kingfisher
 final class EventListDetailViewController: UIViewController {
     private let randomImage: String = "https://hatrabbits.com/wp-content/uploads/2017/01/random.jpg"
     
+    var titleLbl = ""
+    var descriptionEvent = ""
     
-    var eventListTableViewCell: EventListTableViewCell?
-    let cellEventListReuseIdentifier = "cellEventListReuseIdentifier"
-    let apiService = APIService()
+    var image = UIImage()
+    
+    
     var events =  [EventModel]()
     var safeArea: UILayoutGuide!
     
+    var eventListViewController = EventListViewController()
+    var eventListTableViewCell: EventListTableViewCell?
     
-    lazy var imageViewEvent: UIImageView = {
+    lazy var imageViewEventDetail: UIImageView = {
         let image = UIImageView()
-        image.layer.cornerRadius = 12
         image.clipsToBounds = true
+        image.backgroundColor = .systemPink
         image.translatesAutoresizingMaskIntoConstraints = false
-        image.contentMode = .scaleAspectFill
+        image.contentMode = .scaleAspectFit
+        image.image = UIImage()
         return image
     }()
     
-    lazy var titleEvent: UILabel = {
+    lazy var titleEventLabelDetail: UILabel = {
         let label = UILabel()
-        label.text = "Título do evento"
-        label.font = UIFont.monospacedDigitSystemFont(ofSize: 30, weight: UIFont.Weight.heavy)
+        label.text = ""
+        label.font = UIFont.monospacedDigitSystemFont(ofSize: 25, weight: UIFont.Weight.heavy)
         label.adjustsFontSizeToFitWidth = true
-        label.textColor = .white
+        label.textColor = .systemGray
+        label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
         return label
     }()
     
-    lazy var eventDetailTableView: UITableView = {
-        let tableview = UITableView()
-        tableview.translatesAutoresizingMaskIntoConstraints = false
-        return tableview
+    lazy var textViewEventDetail: UITextField = {
+        let textView = UITextField()
+        textView.center = self.view.center
+        textView.textAlignment = .center
+        textView.textColor = UIColor.black
+        textView.backgroundColor = UIColor.systemPink
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        textView.layer.cornerRadius = 12
+        
+        return textView
     }()
     
-    
-    fileprivate func fecthData() {
-        apiService.fetchAllData {
-            data in
-            self.events = data ?? []
-            DispatchQueue.main.async {
-                self.eventDetailTableView.reloadData()
-            }
-        }
-    }
-    
+  
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .yellow
         setupViews()
-        fecthData()
         constrainTitleEvent()
-        constrainTableView()
+        constrainImageEvent()
+        constrainTextViewEventDetail()
+        textViewEventDetail.text = "\(descriptionEvent)"
+        imageViewEventDetail.image = image
+        titleEventLabelDetail.text = "\(titleLbl)"
+        textViewEventDetail.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -78,71 +83,52 @@ final class EventListDetailViewController: UIViewController {
     
     func setupViews() {
         safeArea = view.layoutMarginsGuide
-        view.backgroundColor = .red
-        eventDetailTableView.backgroundColor = .clear
-        view.addSubview(imageViewEvent)
-        view.addSubview(titleEvent)
-        view.addSubview(eventDetailTableView)
-        eventDetailTableView.register(EventListTableViewCell.self, forCellReuseIdentifier: cellEventListReuseIdentifier)
-        eventDetailTableView.delegate = self
-        eventDetailTableView.dataSource = self
+        view.backgroundColor = .systemBackground
+        view.addSubview(imageViewEventDetail)
+        view.addSubview(titleEventLabelDetail)
+        view.addSubview(textViewEventDetail)
+     
     }
+    
+    private  func constrainImageEvent(){
+        let constraint = [
+            imageViewEventDetail.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 0),
+            imageViewEventDetail.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
+            imageViewEventDetail.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
+            imageViewEventDetail.heightAnchor.constraint(equalToConstant: 280),
+        ]
+        constraint.forEach { (item) in
+            item.isActive = true
+        }
+    }
+    
     
     private  func constrainTitleEvent(){
         let constraint = [
-            titleEvent.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 20),
-            titleEvent.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 22),
-            titleEvent.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant:  -10),
+            titleEventLabelDetail.topAnchor.constraint(equalTo: imageViewEventDetail.bottomAnchor, constant: 35),
+            titleEventLabelDetail.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 22),
+            titleEventLabelDetail.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant:  -10),
         ]
         constraint.forEach { (item) in
             item.isActive = true
         }
     }
     
-    
-    private  func constrainTableView(){
+    private  func constrainTextViewEventDetail(){
         let constraint = [
-            eventDetailTableView.topAnchor.constraint(equalTo: titleEvent.bottomAnchor, constant: 30),
-            eventDetailTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            eventDetailTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant:  -20),
-            eventDetailTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -30),
+            textViewEventDetail.topAnchor.constraint(equalTo: titleEventLabelDetail.bottomAnchor, constant: 30),
+            textViewEventDetail.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
+            textViewEventDetail.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant:  -25),
+            textViewEventDetail.heightAnchor.constraint(equalToConstant: 280),
         ]
         constraint.forEach { (item) in
             item.isActive = true
         }
     }
-}
-
-
-extension EventListDetailViewController: UITableViewDelegate {
     
 }
 
-extension EventListDetailViewController: UITableViewDataSource{
+
+extension EventListDetailViewController: UITextFieldDelegate {
     
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return events.count
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 200
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell =  tableView.dequeueReusableCell(withIdentifier: cellEventListReuseIdentifier, for: indexPath) as! EventListTableViewCell
-        let eventObject = events[indexPath.row]
-        cell.configure(with: eventObject)
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        cell.contentView.backgroundColor = .white
-        let radius = cell.contentView.layer.cornerRadius
-        cell.layer.shadowPath = UIBezierPath(roundedRect: cell.bounds, cornerRadius: radius).cgPath
-        cell.contentView.layer.masksToBounds = true
-    }
 }

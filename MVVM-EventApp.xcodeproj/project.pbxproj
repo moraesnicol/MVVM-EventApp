@@ -19,7 +19,6 @@
 		C0AC6D2126CE003F0041C6B2 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AC6D2026CE003F0041C6B2 /* APIService.swift */; };
 		C0AC6D2426CE00620041C6B2 /* EventModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AC6D2326CE00620041C6B2 /* EventModel.swift */; };
 		C0AC6D2826CE01930041C6B2 /* EventListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AC6D2726CE01930041C6B2 /* EventListViewModel.swift */; };
-		C0E4023826D339370025E7CE /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E4023726D339370025E7CE /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,7 +35,6 @@
 		C0AC6D2026CE003F0041C6B2 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		C0AC6D2326CE00620041C6B2 /* EventModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventModel.swift; sourceTree = "<group>"; };
 		C0AC6D2726CE01930041C6B2 /* EventListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListViewModel.swift; sourceTree = "<group>"; };
-		C0E4023726D339370025E7CE /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,7 +60,6 @@
 		C018053826CEBB7E00ACC80D /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				C0E4023626D2E0AD0025E7CE /* Extensions */,
 				C0AC6D1F26CE002C0041C6B2 /* APIService */,
 				C0AC6D2226CE004B0041C6B2 /* Model */,
 				C0AC6D2526CE01120041C6B2 /* ViewModel */,
@@ -183,14 +180,6 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
-		C0E4023626D2E0AD0025E7CE /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				C0E4023726D339370025E7CE /* Extensions.swift */,
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -269,7 +258,6 @@
 				C09538F126D17C94005520E1 /* EventListTableViewCell.swift in Sources */,
 				C0AC6D0F26CDFF5C0041C6B2 /* EventListViewController.swift in Sources */,
 				C0AC6D2826CE01930041C6B2 /* EventListViewModel.swift in Sources */,
-				C0E4023826D339370025E7CE /* Extensions.swift in Sources */,
 				C00DF39F26D4244D00419CEF /* EventListDetailViewController.swift in Sources */,
 				C0AC6D0B26CDFF5C0041C6B2 /* AppDelegate.swift in Sources */,
 				C0AC6D2126CE003F0041C6B2 /* APIService.swift in Sources */,

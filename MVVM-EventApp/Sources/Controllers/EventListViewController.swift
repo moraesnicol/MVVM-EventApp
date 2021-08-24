@@ -9,10 +9,11 @@ import UIKit
 import Kingfisher
 
 
-final class EventListViewController: UIViewController {
+final class EventListViewController: UIViewController, UITextFieldDelegate {
     
     var eventListTableViewCell: EventListTableViewCell?
     let cellEventListReuseIdentifier = "cellEventListReuseIdentifier"
+    private let randomImage: String = "https://hatrabbits.com/wp-content/uploads/2017/01/random.jpg"
     let apiService = APIService()
     var events =  [EventModel]()
     var safeArea: UILayoutGuide!
@@ -53,7 +54,7 @@ final class EventListViewController: UIViewController {
         constrainTopTitle()
         constrainTableView()
     }
-   
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setNeedsStatusBarAppearanceUpdate()
@@ -63,22 +64,22 @@ final class EventListViewController: UIViewController {
     }
     
     
-   func setupViews() {
-    safeArea = view.layoutMarginsGuide
-    view.backgroundColor = UIColor(red: 0.09, green: 0.05, blue: 0.35, alpha: 1.00)
-    eventTableView.backgroundColor = .clear
-    view.addSubview(eventTableView)
-    view.addSubview(topTitle)
-    eventTableView.register(EventListTableViewCell.self, forCellReuseIdentifier: cellEventListReuseIdentifier)
-    eventTableView.delegate = self
-    eventTableView.dataSource = self
+    func setupViews() {
+        safeArea = view.layoutMarginsGuide
+        view.backgroundColor = UIColor(red: 0.09, green: 0.05, blue: 0.35, alpha: 1.00)
+        eventTableView.backgroundColor = .clear
+        view.addSubview(eventTableView)
+        view.addSubview(topTitle)
+        eventTableView.register(EventListTableViewCell.self, forCellReuseIdentifier: cellEventListReuseIdentifier)
+        eventTableView.delegate = self
+        eventTableView.dataSource = self
     }
-
+    
     private  func constrainTopTitle(){
         let constraint = [
-          topTitle.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 20),
-           topTitle.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 22),
-           topTitle.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant:  -10),
+            topTitle.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 20),
+            topTitle.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 22),
+            topTitle.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant:  -10),
         ]
         constraint.forEach { (item) in
             item.isActive = true
@@ -97,19 +98,26 @@ final class EventListViewController: UIViewController {
             item.isActive = true
         }
     }
+    
+    
 }
 
 
 extension EventListViewController: UITableViewDelegate {
     
-  
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-                
-                let rootVc = EventListDetailViewController()
-                let navVC = UINavigationController(rootViewController: rootVc)
-                navVC.modalTransitionStyle =  .flipHorizontal
-                present(navVC, animated: true)
-            }
+        
+        var anyImage = UIImage(named: "2")
+        let rootVc = EventListDetailViewController()
+        rootVc.titleLbl = events[indexPath.row].title ?? ""
+        rootVc.descriptionEvent = events[indexPath.row].eventModelDescription ?? "any description"
+       // guard let image = events[indexPath.row].image  else { return }
+        rootVc.image = events[indexPath.row].image as? UIImage ?? anyImage as! UIImage
+        
+        let navVC = UINavigationController(rootViewController: rootVc)
+        navVC.modalTransitionStyle =  .flipHorizontal
+        present(navVC, animated: true)
+    }
 }
 
 extension EventListViewController: UITableViewDataSource{
@@ -134,7 +142,6 @@ extension EventListViewController: UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        // this will turn on `masksToBounds` just before showing the cell
         cell.contentView.backgroundColor = .white
         let radius = cell.contentView.layer.cornerRadius
         cell.layer.shadowPath = UIBezierPath(roundedRect: cell.bounds, cornerRadius: radius).cgPath
